@@ -8,20 +8,6 @@
   "bin": {
     "s97-log": "./dist/cli/index.js"
   },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./express": {
-      "types": "./dist/express.d.ts",
-      "import": "./dist/express.js"
-    },
-    "./browser": {
-      "types": "./dist/browser.d.ts",
-      "import": "./dist/browser.js"
-    }
-  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "buildwatch": "tsc -w --preserveWatchOutput -p tsconfig.json",
