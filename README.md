@@ -1,4 +1,4 @@
-# s97-js-logger
+# @manuxio/s97-js-logger
 
 A lightweight, high-performance logging library for Node.js projects with support for:
 
@@ -20,17 +20,34 @@ A lightweight, high-performance logging library for Node.js projects with suppor
 
 ## Installation
 
+This is a private package hosted on GitHub Packages. To install, you first need to configure npm to use the GitHub registry:
+
 ```bash
-npm install s97-js-logger
-````
+npm config set @manuxio:registry https://npm.pkg.github.com
+```
+
+Then install the package:
+
+```bash
+npm install @manuxio/s97-js-logger
+```
+
+**Note**: You need to be authenticated with GitHub to install private packages. Create a `.npmrc` file in your project root with:
+
+```
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+@manuxio:registry=https://npm.pkg.github.com
+```
+
+Set `GITHUB_TOKEN` environment variable with a personal access token that has `read:packages` scope.
 
 ---
 
 ## Usage
 
 ```ts
-import { Logger } from 's97-js-logger';
-import type { LogConfig } from 's97-js-logger/types';
+import { Logger } from '@manuxio/s97-js-logger';
+import type { LogConfig } from '@manuxio/s97-js-logger/types';
 
 const config: LogConfig = {
   globalLevel: 'info',
@@ -63,7 +80,7 @@ logger.update({
 
 Available levels (from highest severity to lowest):
 
-```
+```plaintext
 fatal > error > warn > info > debug > trace > verbose
 ```
 
@@ -75,7 +92,7 @@ Each sink has its own `minLevel`, and you can override levels per topic in `topi
 
 Topics let you route and filter logs. Example:
 
-```ts
+```typescript
 logger.info('auth', 'User login success', { userId: 'u123' });
 logger.debug('payments', 'Payment gateway response', { status: 'OK' });
 ```
@@ -99,9 +116,9 @@ You can allow or deny topics per sink:
 
 ## HTTP Middleware
 
-```ts
+```typescript
 import express from 'express';
-import { httpLogger } from 's97-js-logger';
+import { httpLogger } from '@manuxio/s97-js-logger';
 
 const app = express();
 app.use(httpLogger('http'));
@@ -146,21 +163,21 @@ Add an optional `forceLog` block to your `LogConfig`:
 
 **Fields**:
 
-* `pattern`: String passed to `new RegExp(pattern, flags)`
-* `flags`: Optional JS regex flags (e.g., `"i"`)
-* `fields`: Array of keys (dot-paths allowed) to search; **defaults to `["msg"]`** if omitted or empty.
+- `pattern`: String passed to `new RegExp(pattern, flags)`
+- `flags`: Optional JS regex flags (e.g., `"i"`)
+- `fields`: Array of keys (dot-paths allowed) to search; **defaults to `["msg"]`** if omitted or empty.
 
 **Behavior**:
 
-* Matching entries are sent to all **enabled** sinks regardless of:
+- Matching entries are sent to all **enabled** sinks regardless of:
 
-  * Global/topic min level
-  * Per-sink min level
-  * Per-sink topic allow/deny lists
-* Each matching log will include in its structured payload:
+  - Global/topic min level
+  - Per-sink min level
+  - Per-sink topic allow/deny lists
+- Each matching log will include in its structured payload:
 
-  * `forced: true`
-  * `forcedRule: <index>`
+  - `forced: true`
+  - `forcedRule: <index>`
 
 ---
 
@@ -188,8 +205,8 @@ Add an optional `forceDontLog` block to your `LogConfig`:
 
 **Behavior**:
 
-* If a record matches any `forceDontLog` rule, it is **dropped entirely** (no sinks receive it).
-* This check runs **before** `forceLog` and before any normal level/topic filtering.
+- If a record matches any `forceDontLog` rule, it is **dropped entirely** (no sinks receive it).
+- This check runs **before** `forceLog` and before any normal level/topic filtering.
 
 ---
 
@@ -242,15 +259,15 @@ This “deny-first, then allow” ordering avoids ambiguity if a message matches
 
 ## File Sink Notes
 
-* When using `topicFilePath`, `%TOPIC%` is replaced with the topic name (sanitized to `[A-Za-z0-9._-]`).
+- When using `topicFilePath`, `%TOPIC%` is replaced with the topic name (sanitized to `[A-Za-z0-9._-]`).
 
 ---
 
 ## Graylog Notes
 
-* GELF messages include `_topic`, `_script` (service name), `_router` (router name), and any extra flat fields from the log call.
-* Forced logs add `_forced` and `_forcedRule` for visibility (stdout/file use `forced`/`forcedRule` fields).
-* For `forceDontLog` matches, **no message** is emitted to GELF (by design).
+- GELF messages include `_topic`, `_script` (service name), `_router` (router name), and any extra flat fields from the log call.
+- Forced logs add `_forced` and `_forcedRule` for visibility (stdout/file use `forced`/`forcedRule` fields).
+- For `forceDontLog` matches, **no message** is emitted to GELF (by design).
 
 ---
 
@@ -258,10 +275,10 @@ This “deny-first, then allow” ordering avoids ambiguity if a message matches
 
 A simple package test can verify:
 
-* Normal level/topic filtering
-* `forceLog` allows messages that would otherwise be filtered
-* `forceDontLog` suppresses matching messages and takes precedence
-* File sink receives JSON lines as expected
+- Normal level/topic filtering
+- `forceLog` allows messages that would otherwise be filtered
+- `forceDontLog` suppresses matching messages and takes precedence
+- File sink receives JSON lines as expected
 
 (See `scripts/test-logger.ts` or a CommonJS variant using the compiled `dist/` output.)
 
@@ -270,6 +287,3 @@ A simple package test can verify:
 ## License
 
 MIT
-
-```
-```
