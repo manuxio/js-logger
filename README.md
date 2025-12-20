@@ -23,22 +23,26 @@ A lightweight, high-performance logging library for Node.js projects with suppor
 Install directly from the GitHub repository:
 
 ### Option 1: HTTPS (Recommended)
+
 ```bash
 npm install https://github.com/manuxio/js-logger.git
 ```
 
 ### Option 2: SSH
+
 ```bash
 npm install git@github.com:manuxio/js-logger.git
 ```
 
 ### Option 3: Specific branch/tag
+
 ```bash
 npm install https://github.com/manuxio/js-logger.git#master
 npm install https://github.com/manuxio/js-logger.git#v1.0.0
 ```
 
 ### Option 4: Add to package.json
+
 ```json
 {
   "dependencies": {
