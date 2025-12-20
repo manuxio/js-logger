@@ -1,10 +1,7 @@
 {
-  "name": "@manuxio/s97-js-logger",
+  "name": "s97-js-logger",
   "version": "1.0.0",
-  "private": true,
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
+  "private": false,
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

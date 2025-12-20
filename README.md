@@ -1,4 +1,4 @@
-# @manuxio/s97-js-logger
+# s97-js-logger
 
 A lightweight, high-performance logging library for Node.js projects with support for:
 
@@ -20,34 +20,42 @@ A lightweight, high-performance logging library for Node.js projects with suppor
 
 ## Installation
 
-This is a private package hosted on GitHub Packages. To install, you first need to configure npm to use the GitHub registry:
+Install directly from the GitHub repository:
 
+### Option 1: HTTPS (Recommended)
 ```bash
-npm config set @manuxio:registry https://npm.pkg.github.com
+npm install https://github.com/manuxio/js-logger.git
 ```
 
-Then install the package:
-
+### Option 2: SSH
 ```bash
-npm install @manuxio/s97-js-logger
+npm install git@github.com:manuxio/js-logger.git
 ```
 
-**Note**: You need to be authenticated with GitHub to install private packages. Create a `.npmrc` file in your project root with:
-
+### Option 3: Specific branch/tag
+```bash
+npm install https://github.com/manuxio/js-logger.git#master
+npm install https://github.com/manuxio/js-logger.git#v1.0.0
 ```
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-@manuxio:registry=https://npm.pkg.github.com
+
+### Option 4: Add to package.json
+```json
+{
+  "dependencies": {
+    "s97-js-logger": "git+https://github.com/manuxio/js-logger.git"
+  }
+}
 ```
 
-Set `GITHUB_TOKEN` environment variable with a personal access token that has `read:packages` scope.
+**Note**: No authentication required for public repositories. The package includes the built `dist/` folder, so it works immediately after installation.
 
 ---
 
 ## Usage
 
 ```ts
-import { Logger } from '@manuxio/s97-js-logger';
-import type { LogConfig } from '@manuxio/s97-js-logger/types';
+import { Logger } from 's97-js-logger';
+import type { LogConfig } from 's97-js-logger/types';
 
 const config: LogConfig = {
   globalLevel: 'info',
@@ -118,7 +126,7 @@ You can allow or deny topics per sink:
 
 ```typescript
 import express from 'express';
-import { httpLogger } from '@manuxio/s97-js-logger';
+import { httpLogger } from 's97-js-logger';
 
 const app = express();
 app.use(httpLogger('http'));
