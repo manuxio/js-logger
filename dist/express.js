@@ -1,6 +1,6 @@
 import { getLogger } from './index.js';
-export function httpLogger() {
-    const log = getLogger('http');
+export function httpLogger(topic = 'http') {
+    const log = getLogger(topic);
     return (req, res, next) => {
         const start = process.hrtime.bigint();
         res.on('finish', () => {

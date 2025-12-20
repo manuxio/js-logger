@@ -5,6 +5,7 @@ export { EnvConfigProvider } from './config/envProvider.js';
 export { MongoConfigProvider } from './config/mongoProvider.js';
 export { startAutoReload, stopAutoReload } from './reload.js';
 export { createInstance, startAutoReloadInstance } from './instance.js';
+export { httpLogger } from './express.js';
 import { EnvConfigProvider } from './config/envProvider.js';
 import { create, get, setConfig } from './state.js';
 export async function createLogger(opts) {

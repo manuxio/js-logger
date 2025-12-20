@@ -1,8 +1,8 @@
 import type { RequestHandler } from 'express';
 import { getLogger, type TopicLogger } from './index.js';
 
-export function httpLogger(): RequestHandler {
-  const log: TopicLogger = getLogger('http');
+export function httpLogger(topic: string = 'http'): RequestHandler {
+  const log: TopicLogger = getLogger(topic);
   return (req, res, next) => {
     const start = process.hrtime.bigint();
     res.on('finish', () => {

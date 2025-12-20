@@ -15,6 +15,7 @@ export { EnvConfigProvider } from './config/envProvider.js';
 export { MongoConfigProvider } from './config/mongoProvider.js';
 export { startAutoReload, stopAutoReload } from './reload.js';
 export { createInstance, startAutoReloadInstance } from './instance.js';
+export { httpLogger } from './express.js';
 import type { LoggerInitOptions } from './types.js';
 import { setConfig } from './state.js';
 export declare function createLogger(opts: LoggerInitOptions): Promise<import("./logger").Logger>;
