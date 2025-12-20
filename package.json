@@ -42,7 +42,7 @@
     "yaml": "^2.8.1"
   },
   "peerDependencies": {
-    "mongodb": "^6.6.0"
+    "mongodb": "^6.0.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
