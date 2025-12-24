@@ -6,7 +6,7 @@ export declare class BrowserLogger {
     private bufferedLogs;
     private forceRules;
     private forceDontLogRules;
-    constructor(serviceName: string, cfg: LogConfigInBrowser);
+    constructor(appName: string, cfg: LogConfigInBrowser);
     rearmDrain(): void;
     drainToRemote(): Promise<ReturnType<typeof fetch> | void>;
     update(next: Partial<LogConfigInBrowser>): void;

@@ -11,7 +11,7 @@ export async function createInstance(opts: LoggerInitOptions): Promise<Logger> {
   const provider: ConfigProvider = opts.configProvider || new EnvConfigProvider();
   const cfg = opts.initialConfig || await provider.load();
   // routerName and instanceId are optional; keep parity with Logger constructor
-  const logger = new Logger(opts.serviceName, cfg, opts.routerName, opts.instanceId);
+  const logger = new Logger(opts.appName, cfg, opts.routerName, opts.instanceId);
   return logger;
 }
 

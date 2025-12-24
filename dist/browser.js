@@ -1,10 +1,10 @@
 export * from './types.js';
 import { BrowserLogger } from './logger.browser.js';
 let singleton = null;
-export function create(service, cfg, router, instance) {
+export function create(appName, cfg) {
     if (singleton)
         return singleton;
-    singleton = new BrowserLogger(service, cfg);
+    singleton = new BrowserLogger(appName, cfg);
     return singleton;
 }
 export function get() {
@@ -30,7 +30,7 @@ export function createLogger(opts) {
         }
     };
     const cfg = opts.initialConfig || defaultConfig;
-    return create(opts.serviceName, cfg);
+    return create(opts.appName, cfg);
 }
 /** Get the singleton logger or a topic-bound facade. */
 export function getLogger(topic) {

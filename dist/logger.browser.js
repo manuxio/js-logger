@@ -39,8 +39,8 @@ export class BrowserLogger {
     // compiled force rules cache (local to this instance)
     forceRules = [];
     forceDontLogRules = [];
-    constructor(serviceName, cfg) {
-        this.meta = { serviceName };
+    constructor(appName, cfg) {
+        this.meta = { appName };
         this.cfg = this.normalize(cfg);
         this.applyForceRules();
         this.rearmDrain();
@@ -213,7 +213,7 @@ export class BrowserLogger {
             msg,
             topic,
             level,
-            script: this.meta.serviceName
+            app: this.meta.appName
         };
         const matchedDenyRule = this.forceDontLogMatch(eventBase);
         if (matchedDenyRule >= 0) {
@@ -237,7 +237,7 @@ export class BrowserLogger {
         if (this.cfg.sinks.remote?.enabled) {
             if (forced || (LEVELS[level] >= LEVELS[this.cfg.sinks.remote.minLevel] && topicAllowed(topic, this.cfg.sinks.remote.topics))) {
                 const outData = forcedExtras ? { ...copyOfData, ...forcedExtras } : copyOfData;
-                this.bufferedLogs.push({ level, topic, msg, data: outData, appId: this.meta.serviceName });
+                this.bufferedLogs.push({ level, topic, msg, data: outData, appId: this.meta.appName });
             }
         }
     }

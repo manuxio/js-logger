@@ -58,7 +58,7 @@ function getByPath(obj: any, path: string): unknown {
 
 export class BrowserLogger {
   private cfg: LogConfigInBrowser;
-  private meta: { serviceName: string; };
+  private meta: { appName: string; };
   private drainInterval: ReturnType<typeof setTimeout> | undefined;
   private bufferedLogs: BufferedLog[] = [];
 
@@ -66,8 +66,8 @@ export class BrowserLogger {
   private forceRules: CompiledForceRule[] = [];
   private forceDontLogRules: CompiledForceRule[] = [];
 
-  constructor(serviceName: string, cfg: LogConfigInBrowser) {
-    this.meta = { serviceName};
+  constructor(appName: string, cfg: LogConfigInBrowser) {
+    this.meta = { appName };
     this.cfg = this.normalize(cfg);
     this.applyForceRules();
     this.rearmDrain();
@@ -78,6 +78,7 @@ export class BrowserLogger {
       this.drainInterval = setTimeout(async () => await this.drainToRemote(), Math.min(5000, this.cfg.sinks.remote.drainInterval));
     }
   }
+
   async drainToRemote() : Promise< ReturnType<typeof fetch> | void> {
     this.drainInterval = undefined;
     if (!this.cfg.sinks.remote?.enabled) {
@@ -238,7 +239,7 @@ export class BrowserLogger {
       msg,
       topic,
       level,
-      script: this.meta.serviceName
+      app: this.meta.appName
     };
 
 
@@ -267,7 +268,7 @@ export class BrowserLogger {
     if (this.cfg.sinks.remote?.enabled) {
       if (forced || (LEVELS[level] >= LEVELS[this.cfg.sinks.remote.minLevel] && topicAllowed(topic, this.cfg.sinks.remote.topics))) {
         const outData = forcedExtras ? { ...copyOfData, ...forcedExtras } : copyOfData;
-        this.bufferedLogs.push({ level, topic, msg, data: outData, appId: this.meta.serviceName });
+        this.bufferedLogs.push({ level, topic, msg, data: outData, appId: this.meta.appName });
       }
     }
   }

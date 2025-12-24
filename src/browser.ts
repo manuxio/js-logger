@@ -4,9 +4,9 @@ import { BrowserLogger } from './logger.browser.js';
 
 let singleton: BrowserLogger | null = null;
 
-export function create(service: string, cfg: LogConfigInBrowser, router?: string, instance?: string) {
+export function create(appName: string, cfg: LogConfigInBrowser) {
   if (singleton) return singleton;
-  singleton = new BrowserLogger(service, cfg);
+  singleton = new BrowserLogger(appName, cfg);
   return singleton;
 }
 
@@ -48,7 +48,7 @@ export function createLogger(opts: LoggerInitOptionsInBrowser) {
   }
 
   const cfg = opts.initialConfig || defaultConfig;
-  return create(opts.serviceName, cfg);
+  return create(opts.appName, cfg);
 }
 
 

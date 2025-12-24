@@ -96,7 +96,7 @@ export interface LogConfig {
 }
 
 export interface LoggerInitOptions {
-  serviceName: string;
+  appName: string;
   routerName?: string;
   instanceId?: string;
   initialConfig?: LogConfig;
@@ -104,7 +104,7 @@ export interface LoggerInitOptions {
 }
 
 export interface LoggerInitOptionsInBrowser {
-  serviceName: string;
+  appName: string;
   initialConfig?: LogConfigInBrowser;
 }
 

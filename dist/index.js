@@ -11,7 +11,7 @@ import { create, get, setConfig } from './state.js';
 export async function createLogger(opts) {
     const provider = opts.configProvider || new EnvConfigProvider();
     const cfg = opts.initialConfig || await provider.load();
-    return create(opts.serviceName, cfg, opts.routerName, opts.instanceId);
+    return create(opts.appName, cfg, opts.routerName, opts.instanceId);
 }
 // implementation
 export function getLogger(topic) {

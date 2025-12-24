@@ -81,14 +81,14 @@ export interface LogConfig {
     forceDontLog?: ForceDontLogConfig;
 }
 export interface LoggerInitOptions {
-    serviceName: string;
+    appName: string;
     routerName?: string;
     instanceId?: string;
     initialConfig?: LogConfig;
     configProvider?: ConfigProvider;
 }
 export interface LoggerInitOptionsInBrowser {
-    serviceName: string;
+    appName: string;
     initialConfig?: LogConfigInBrowser;
 }
 export interface LogConfigInBrowser {

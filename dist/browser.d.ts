@@ -1,7 +1,7 @@
 export * from './types.js';
 import type { LoggerInitOptionsInBrowser, LogConfigInBrowser } from './types.js';
 import { BrowserLogger } from './logger.browser.js';
-export declare function create(service: string, cfg: LogConfigInBrowser, router?: string, instance?: string): BrowserLogger;
+export declare function create(appName: string, cfg: LogConfigInBrowser): BrowserLogger;
 export declare function get(): BrowserLogger;
 export declare function setConfig(cfg: LogConfigInBrowser): void;
 export interface TopicLogger {
