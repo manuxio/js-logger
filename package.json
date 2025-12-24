@@ -1,6 +1,6 @@
 {
   "name": "s97-js-logger",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": false,
   "type": "module",
   "main": "dist/index.js",
@@ -33,7 +33,7 @@
     "test": "ts-node scripts/test-logger.ts",
     "log": "tsx src/cli/index.ts",
     "prepublishOnly": "npm run build",
-    "publish": "git add . && git commit -m \"chore: bump version\" && git push --follow-tags"
+    "publish": "git add . && git commit -m \"chore: bump version\" && git push --tags"
   },
   "dependencies": {
     "chalk": "^5.3.0",
